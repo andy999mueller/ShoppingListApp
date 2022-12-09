@@ -42,6 +42,9 @@ namespace ShoppingListApp.ViewModel
       /// </summary>
       private string _newShoppingListName;
 
+      /// <summary>
+      /// Backing field for <see cref="IsRefreshing"/>
+      /// </summary>
       private bool _isRefreshing;
 
       /// <summary>
@@ -91,7 +94,6 @@ namespace ShoppingListApp.ViewModel
       [RelayCommand]
       public async Task LoadShoppingLists()
       {
-         IsRefreshing = true;
          ShoppingLists.Clear();
          var shoppingListsFromApi = await _clientService.GetShoppingLists();
          var shoppingListViewModels = shoppingListsFromApi.Select(shoppingList => _viewModelCreator.CreateShoppingListViewModel(shoppingList)).ToList();
