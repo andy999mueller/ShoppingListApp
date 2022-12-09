@@ -19,6 +19,7 @@
          Text="+"
          FontSize="20"/>
       <RefreshView
+         Command="{Binding LoadShoppingListsCommand}"
          Grid.ColumnSpan="2"
          Grid.Row="1">
          <CollectionView

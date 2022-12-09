@@ -17,7 +17,7 @@ public sealed class ShoppingListClientService
 
    private readonly HttpClient _httpClient;
    
-   private static readonly Uri Url = new("http://www.andy-maichingen.de/ShoppingList/api/purchase");
+   private static readonly Uri Url = new("https://www.andy-maichingen.de/ShoppingList/api/purchase");
 
    /// <summary>
    /// Receive the shopping lists from api
