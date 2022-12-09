@@ -42,6 +42,8 @@ namespace ShoppingListApp.ViewModel
       /// </summary>
       private string _newShoppingListName;
 
+      private bool _isRefreshing;
+
       /// <summary>
       /// List containing all the shopping lists
       /// </summary>
@@ -58,6 +60,15 @@ namespace ShoppingListApp.ViewModel
       {
          get => _newShoppingListName;
          set => SetProperty(ref _newShoppingListName, value);
+      }
+
+      /// <summary>
+      /// This property controls the refresh of the shopping lists
+      /// </summary>
+      public bool IsRefreshing
+      {
+         get => _isRefreshing;
+         set => SetProperty(ref _isRefreshing, value);
       }
 
       /// <summary>
@@ -80,6 +91,7 @@ namespace ShoppingListApp.ViewModel
       [RelayCommand]
       public async Task LoadShoppingLists()
       {
+         IsRefreshing = true;
          ShoppingLists.Clear();
          var shoppingListsFromApi = await _clientService.GetShoppingLists();
          var shoppingListViewModels = shoppingListsFromApi.Select(shoppingList => _viewModelCreator.CreateShoppingListViewModel(shoppingList)).ToList();
@@ -87,6 +99,7 @@ namespace ShoppingListApp.ViewModel
          {
             ShoppingLists.Add(vm);
          }
+         IsRefreshing = false;
       }
 
       /// <summary>
