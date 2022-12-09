@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:ShoppingListApp.ViewModel"
+             x:Class="ShoppingListApp.View.DetailPage"
+             x:DataType="viewModel:DetailPageViewModel"
+             Title="Details">
+   <Grid 
+      ColumnDefinitions="0.75*,0.25*"
+      RowDefinitions="Auto,Auto,*">
+      <Label 
+         Grid.Row="0" 
+         Grid.ColumnSpan="2"
+         HorizontalOptions="Center"
+         FontSize="24"
+         Text="{Binding ShoppingList.Description}"/>
+      <Entry 
+         Grid.Row="1"
+         Grid.Column="0"
+         Text="{Binding NewArticle}"/>
+      <Button
+         Grid.Row="1"
+         Grid.Column="1"
+         Text="+"
+         FontSize="20"
+         Command="{Binding AddNewArticleCommand}"
+         CommandParameter="{Binding NewArticle}"/>
+      <RefreshView
+         Margin="10"
+         Grid.Row="2"
+         Grid.ColumnSpan="2">
+      <CollectionView
+         ItemsSource="{Binding ShoppingList.Articles, Mode=TwoWay}">
+         <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="viewModel:ArticleViewModel">
+               <Grid ColumnDefinitions=".90*,.10*">
+                  <Frame Grid.Column="0">
+                     <Frame.GestureRecognizers>
+                        <TapGestureRecognizer 
+                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:DetailPageViewModel}},Path=SetArticleUsedCommand}"
+                           CommandParameter="{Binding .}"/>
+                     </Frame.GestureRecognizers>
+                     <Label Text="{Binding Name}" TextDecorations="{Binding TextDecoration}"/>
+                  </Frame>
+                  <Button
+                     Text="X"
+                     FontSize="20"
+                     Grid.Column="1"
+                     BackgroundColor="Red"
+                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:DetailPageViewModel}},Path=DeleteArticleCommand}"
+                     CommandParameter="{Binding .}"/>
+               </Grid>
+            </DataTemplate>
+         </CollectionView.ItemTemplate>
+      </CollectionView>
+      </RefreshView>
+   </Grid>
+</ContentPage>
