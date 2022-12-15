@@ -9,9 +9,18 @@
          RowSpacing="10"
          ColumnSpacing="10"
          Padding="10">
-      <Entry Grid.Row="0"
-             Grid.Column="0"
+      <Border
+         Grid.Row="0"
+         Grid.Column="0">
+         <Border.StrokeShape>
+            <RoundRectangle CornerRadius="10,10,10,10" />
+         </Border.StrokeShape>
+         <Entry 
+             Placeholder="Name des Einkaufs..."
+             Margin="10,0,0,0"
+             VerticalTextAlignment="Center"
              Text="{Binding NewShoppingListName}"/>
+      </Border>
       <Button
          Grid.Column="1"
          Command="{Binding CreateShoppingListCommand}"

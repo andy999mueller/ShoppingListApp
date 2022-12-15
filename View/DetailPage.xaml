@@ -14,10 +14,18 @@
          HorizontalOptions="Center"
          FontSize="24"
          Text="{Binding ShoppingList.Description}"/>
-      <Entry 
+      <Border
          Grid.Row="1"
-         Grid.Column="0"
+         Grid.Column="0">
+         <Border.StrokeShape>
+            <RoundRectangle CornerRadius="10,10,10,10" />
+         </Border.StrokeShape>
+         <Entry 
+         Placeholder="Artikel..."
+         Margin="10,0,0,0"
+         VerticalTextAlignment="Center"
          Text="{Binding NewArticle}"/>
+      </Border>
       <Button
          Grid.Row="1"
          Grid.Column="1"
